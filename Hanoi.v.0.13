@@ -26,6 +26,7 @@ GraphicsWindow.MouseMove = Move
 GraphicsWindow.MouseUp = Up
 
 Sub Down
+  'If Stack.GetCount("neg") > 1 Then
   If GraphicsWindow.MouseX < 300 Then
     disk = Stack.PopValue("neg")
     dugaar = Stack.PopValue("negD")
@@ -47,10 +48,12 @@ EndSub
 
 Sub Up
   If GraphicsWindow.MouseX < 300 Then
-      Shapes.Move(disk, 190-dugaar*10, 420+dugaar*20)
+    Shapes.Move(disk, 190-dugaar*10, 420+dugaar*20)
+    Stack.PushValue("neg", disk)
+    Stack.PushValue("negD", dugaar)
   ElseIf GraphicsWindow.MouseX > 300 and GraphicsWindow.MouseX < 500 Then
-      Shapes.Move(disk, 390-dugaar*10, 420+dugaar*20)
+      Shapes.Move(disk, 390-dugaar*10, 600-Stack.GetCount("hoyr")*20)
   ElseIf GraphicsWindow.MouseX < 800 Then
-      Shapes.Move(disk, 590-dugaar*10, 420+dugaar*20)
+      Shapes.Move(disk, 590-dugaar*10, 600-Stack.GetCount("gurav")*20)
   EndIf
 EndSub
