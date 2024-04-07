@@ -1,0 +1,41 @@
+
+GraphicsWindow.Title = "Drag and Drop Sample"
+Init()
+MainLoop()
+
+Sub Init
+' initialization
+GraphicsWindow.BackgroundColor = "#333333"
+GraphicsWindow.PenWidth = 0
+GraphicsWindow.BrushColor = "Gold"
+size = 40
+rect = Shapes.AddEllipse(size, size)
+GraphicsWindow.MouseDown = OnMouseDown
+GraphicsWindow.MouseMove = OnMouseMove
+EndSub
+
+Sub OnMouseDown
+  mx = GraphicsWindow.MouseX
+  my = GraphicsWindow.MouseY
+EndSub
+  
+Sub OnMouseMove
+  mx = GraphicsWindow.MouseX
+  my = GraphicsWindow.MouseY
+EndSub
+  
+Sub MainLoop
+  While "True"
+  x1 = Shapes.GetLeft(rect)
+  y1 = Shapes.GetTop(rect)
+  x2 = x1 + size
+  y2 = y1 + size
+  If (x1 <=mx) And (mx < x2) And (y1 <= my) And (my < y2) Then
+    dx = mx - x1
+    dy = my - y1
+    While Mouse.IsLeftButtonDown
+      Shapes.Move(rect, mx-dx, my-dy)
+    EndWhile
+  EndIf
+  EndWhile
+EndSub
