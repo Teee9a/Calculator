@@ -1,0 +1,56 @@
+Stack.PushValue("neg", "a0")
+Stack.PushValue("hoyr", "b0")
+Stack.PushValue("gurav", "c0")
+Stack.PushValue("negD", "0")
+Stack.PushValue("hoyrD", "0")
+Stack.PushValue("guravD", "0")
+
+GraphicsWindow.CanResize = 0
+GraphicsWindow.Width = 800
+GraphicsWindow.Height = 600
+GraphicsWindow.PenWidth = 10
+GraphicsWindow.DrawLine(200, 600, 200, 400)
+GraphicsWindow.DrawLine(400, 600, 400, 400)
+GraphicsWindow.DrawLine(600, 600, 600, 400)
+
+For i = 8 To 1 Step -1
+  GraphicsWindow.PenColor = GraphicsWindow.GetRandomColor()
+  durs[i] = Shapes.AddEllipse(20+i*20, 20)
+  Shapes.Move(durs[i], 190-i*10, 420+i*20)
+  Stack.PushValue("neg", durs[i])
+  Stack.PushValue("negD", i)
+EndFor
+  
+GraphicsWindow.MouseDown = Down
+GraphicsWindow.MouseMove = Move
+GraphicsWindow.MouseUp = Up
+
+Sub Down
+  If GraphicsWindow.MouseX < 300 Then
+    disk = Stack.PopValue("neg")
+    dugaar = Stack.PopValue("negD")
+    Shapes.Move(disk, GraphicsWindow.MouseX, GraphicsWindow.MouseY)
+  ElseIf GraphicsWindow.MouseX > 300 and GraphicsWindow.MouseX < 500 Then
+    disk = Stack.PopValue("hoyr")
+    dugaar = Stack.PopValue("hoyrD")
+  ElseIf GraphicsWindow.MouseX < 800 Then
+    disk = Stack.PopValue("gurav")
+    dugaar = Stack.PopValue("guravD")
+  EndIf
+EndSub
+
+Sub Move
+  If Mouse.IsLeftButtonDown Then
+    Shapes.Move(disk, GraphicsWindow.MouseX, GraphicsWindow.MouseY)
+  EndIf
+EndSub
+
+Sub Up
+  If GraphicsWindow.MouseX < 300 Then
+      Shapes.Move(disk, 190-dugaar*10, 420+dugaar*20)
+  ElseIf GraphicsWindow.MouseX > 300 and GraphicsWindow.MouseX < 500 Then
+      Shapes.Move(disk, 390-dugaar*10, 420+dugaar*20)
+  ElseIf GraphicsWindow.MouseX < 800 Then
+      Shapes.Move(disk, 590-dugaar*10, 420+dugaar*20)
+  EndIf
+EndSub
