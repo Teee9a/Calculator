@@ -1,0 +1,9 @@
+GraphicsWindow.BackgroundColor = "black"
+GraphicsWindow.BrushColor = "white"
+GraphicsWindow.FillRectangle(400,300,500,300)
+GraphicsWindow.BrushColor = "green"
+GraphicsWindow.FillRectangle(600,300,300,300)
+GraphicsWindow.BrushColor = "white"
+GraphicsWindow.FillEllipse(600,300,200,200)
+GraphicsWindow.BrushColor = "green"
+GraphicsWindow.FillEllipse(650,300,160,160)
